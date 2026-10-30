@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ateliers - Edu-Centre De La Salle</title><link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="style.css"><link rel="icon" href="images/favicon.svg" type="image/svg+xml"><script src="compte.js" defer></script><link rel="stylesheet" href="apparence.css">
+<script src="menu-lateral.js" defer></script>
+<style>.illu-emo{font-size:58px;line-height:1;display:flex;align-items:center;justify-content:center;height:100%}.sommaire-ateliers{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}.sommaire-ateliers a{padding:8px 14px;border-radius:999px;background:#fff;border:2px solid var(--jeux);font-weight:700;text-decoration:none;color:inherit}</style>
+</head><body class="cat-jeux">
+<header class="barre-haut">
+<a class="brand" href="index.html">Edu<span>Centre</span><small>De La Salle · Ottawa</small></a>
+<button class="menu-bouton" type="button" aria-expanded="false" aria-controls="menu-general">☰ Menu</button>
+<nav class="menu-general" id="menu-general" aria-label="Menu général">
+<a href="index.html">Accueil</a><a href="a-propos.html">À propos</a><a href="contact.html">Nous contacter</a><a href="aide.html">Aide</a><a data-compte="eleve" href="connexion.html?role=eleve">🎒 Connexion élève</a><a data-compte="prof" href="connexion.html?role=teacher">🍎 Connexion enseignante</a></nav>
+</header>
+<script>document.currentScript.previousElementSibling.querySelector(".menu-bouton").onclick=function(){var o=this.getAttribute("aria-expanded")!=="true";this.setAttribute("aria-expanded",o);this.parentNode.classList.toggle("ouvert",o)}</script>
+<div class="mise-en-page">
+<aside class="barre-laterale">
+<p class="menu-titre">Activités</p>
+<nav class="menu-activites" aria-label="Catégories d’activités">
+<a href="sports.html" style="--c:var(--sports)"><span class="menu-icone" aria-hidden="true">⚽</span>Sports</a>
+<a href="informatique.html" style="--c:var(--informatique)"><span class="menu-icone" aria-hidden="true">💻</span>Informatique</a>
+<a href="mathematiques.html" style="--c:var(--mathematiques)"><span class="menu-icone" aria-hidden="true">📐</span>Mathématiques</a>
+<a href="francais.html" style="--c:var(--francais)"><span class="menu-icone" aria-hidden="true">📖</span>Français</a>
+<a href="sciences.html" style="--c:var(--sciences)"><span class="menu-icone" aria-hidden="true">🔬</span>Sciences</a>
+<a href="defis.html" style="--c:var(--defis)"><span class="menu-icone" aria-hidden="true">🧩</span>Défis</a>
+<a href="jeux.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🎮</span>Jeux</a>
+<a class="sous-onglet" href="ile-aux-blocs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🏝️</span>Île aux blocs</a>
+<a class="sous-onglet" href="tempete-des-blocs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🌀</span>Tempête des blocs</a>
+<a class="sous-onglet" href="ile-aux-calculs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🔢</span>Île aux calculs</a>
+<a class="sous-onglet" href="village-des-amis.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🏘️</span>Village des amis</a>
+<a class="sous-onglet" href="ville-en-blocs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🏙️</span>La ville en blocs</a>
+<a class="sous-onglet" href="ateliers.html" style="--c:var(--jeux)" aria-current="page"><span class="menu-icone" aria-hidden="true">🧰</span>Ateliers</a>
+<a href="bons-moments-classe.html" style="--c:var(--vie)"><span class="menu-icone" aria-hidden="true">❤️</span>Vie de classe</a>
+<a href="galerie.html" style="--c:var(--vie)"><span class="menu-icone" aria-hidden="true">📸</span>Galerie</a>
+</nav>
+</aside>
+<div class="page">
+
+
+
+<section class="entete-page"><span>MANIPULER • CONSTRUIRE • COMPRENDRE</span><h1>🧰 Ateliers</h1>
+<p>Des jeux pour apprendre en faisant : chaque atelier a plusieurs niveaux, un bouton d’indice, et la réponse expliquée après trois essais. Les consignes peuvent être lues à voix haute 🔊.</p></section>
+<main class="conteneur">
+<nav class="sommaire-ateliers" aria-label="Sommaire">
+<a href="#at-mathematiques">📐 Mathématiques</a> <a href="#at-informatique">💻 Informatique</a> <a href="#at-francais">📖 Français</a> <a href="#at-sciences">🔬 Sciences</a> <a href="#at-vie">❤️ Vie de classe</a></nav>
+<section class="jeux-niveau" aria-labelledby="at-mathematiques">
+<h2 id="at-mathematiques"><span class="pastille-niveau" style="background:var(--mathematiques)">📐</span>Mathématiques</h2>
+<p>Compter l’argent, mesurer, partager des pizzas, se repérer, lire l’heure, faire des enquêtes et travailler les formes.</p>
+<div class="tuiles">
+<a class="tuile" href="ateliers/jeu.html?j=magasin" style="--c1:#2e7d4f;--c2:#a8dcb9;--fonce:#2e7d4f">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🛒</span></span>
+  <span class="tuile-texte"><strong>Le magasin de la ville</strong><small>Payer avec l’argent canadien, rendre la monnaie, respecter un budget.</small></span>
+  <span class="tuile-pied"><b>7 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=chantier" style="--c1:#a35a0b;--c2:#f2c58f;--fonce:#a35a0b">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🏗️</span></span>
+  <span class="tuile-texte"><strong>Le chantier des mesures</strong><small>Mesurer avec une règle, calculer le périmètre et l’aire, construire des rectangles.</small></span>
+  <span class="tuile-pied"><b>7 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=pizzeria" style="--c1:#c0392b;--c2:#f3aaa1;--fonce:#c0392b">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🍕</span></span>
+  <span class="tuile-texte"><strong>La pizzeria des fractions</strong><small>Couper les pizzas en parts égales et servir les commandes en fractions.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=tresor" style="--c1:#2e6b8a;--c2:#a3cfe3;--fonce:#2e6b8a">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🧭</span></span>
+  <span class="tuile-texte"><strong>La chasse au trésor</strong><small>Trouver une case sur un plan, suivre des déplacements, placer des coordonnées (x, y).</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=autobus" style="--c1:#b07d12;--c2:#f2d68a;--fonce:#b07d12">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🚌</span></span>
+  <span class="tuile-texte"><strong>L’horaire de l’autobus</strong><small>Lire l’heure, régler l’horloge, calculer une durée, lire un horaire.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=enquete" style="--c1:#2364aa;--c2:#9fc0ec;--fonce:#2364aa">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">📊</span></span>
+  <span class="tuile-texte"><strong>L’enquête de la classe</strong><small>Marques de pointage, pictogrammes et diagrammes à bandes.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=geoplan" style="--c1:#7a5ad8;--c2:#c9b8f4;--fonce:#7a5ad8">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🔷</span></span>
+  <span class="tuile-texte"><strong>L’atelier des formes</strong><small>Géoplan, côtés et sommets, symétrie, reproduction et translation.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+<section class="jeux-niveau" aria-labelledby="at-informatique">
+<h2 id="at-informatique"><span class="pastille-niveau" style="background:var(--informatique)">💻</span>Informatique</h2>
+<p>Apprendre à programmer pas à pas.</p>
+<div class="tuiles">
+<a class="tuile" href="ateliers/jeu.html?j=robot" style="--c1:#455a75;--c2:#b3c2d6;--fonce:#455a75">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🤖</span></span>
+  <span class="tuile-texte"><strong>Le robot livreur</strong><small>Programmer le robot avec des flèches, éviter les murs, trouver l’erreur.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+<section class="jeux-niveau" aria-labelledby="at-francais">
+<h2 id="at-francais"><span class="pastille-niveau" style="background:var(--francais)">📖</span>Français</h2>
+<p>Lire et écrire des mots et des phrases.</p>
+<div class="tuiles">
+<a class="tuile" href="ateliers/jeu.html?j=imprimerie" style="--c1:#8e3b8e;--c2:#e0aee0;--fonce:#8e3b8e">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🖨️</span></span>
+  <span class="tuile-texte"><strong>L’imprimerie des mots</strong><small>Lettres, syllabes, phrases, déterminants, accords et homophones.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+<section class="jeux-niveau" aria-labelledby="at-sciences">
+<h2 id="at-sciences"><span class="pastille-niveau" style="background:var(--sciences)">🔬</span>Sciences</h2>
+<p>Faire des expériences et observer la nature.</p>
+<div class="tuiles">
+<a class="tuile" href="ateliers/jeu.html?j=laboratoire" style="--c1:#1f8a8a;--c2:#9edada;--fonce:#1f8a8a">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🔬</span></span>
+  <span class="tuile-texte"><strong>Le laboratoire</strong><small>Flotte ou coule, aimants, vivant, états de la matière, lumière, cinq sens.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=jardin" style="--c1:#3f9a4a;--c2:#b2e0b6;--fonce:#3f9a4a">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🌱</span></span>
+  <span class="tuile-texte"><strong>Le jardin des saisons</strong><small>Besoins des plantes, parties, cycles de vie et saisons.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+<section class="jeux-niveau" aria-labelledby="at-vie">
+<h2 id="at-vie"><span class="pastille-niveau" style="background:var(--vie)">❤️</span>Vie de classe</h2>
+<p>Comprendre ses émotions et organiser sa journée.</p>
+<div class="tuiles">
+<a class="tuile" href="ateliers/jeu.html?j=emotions" style="--c1:#c27a0e;--c2:#f4d394;--fonce:#c27a0e">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">💛</span></span>
+  <span class="tuile-texte"><strong>Émotions et bons choix</strong><small>Reconnaître les émotions, le thermomètre des émotions, se calmer, être un bon ami.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=journee" style="--c1:#5a6fd6;--c2:#b6c1f3;--fonce:#5a6fd6">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🖼️</span></span>
+  <span class="tuile-texte"><strong>Ma journée en images</strong><small>Les routines en images : se laver les mains, le matin, le soir, l’école.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+</main><div class="retour"><a href="index.html">← Retour à l'accueil</a></div><footer class="site-footer"><span>EduCentre <b>│</b> De La Salle · Ottawa</span><span>Apprendre aujourd’hui pour demain</span></footer><script src="script.js"></script>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Français - Edu-Centre De La Salle</title><link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="style.css"><link rel="icon" href="images/favicon.svg" type="image/svg+xml"><script src="compte.js" defer></script><link rel="stylesheet" href="apparence.css">
+<script src="menu-lateral.js" defer></script>
+<style>.illu-emo{font-size:58px;line-height:1;display:flex;align-items:center;justify-content:center;height:100%}</style>
+</head><body class="cat-francais">
+<header class="barre-haut">
+<a class="brand" href="index.html">Edu<span>Centre</span><small>De La Salle · Ottawa</small></a>
+<button class="menu-bouton" type="button" aria-expanded="false" aria-controls="menu-general">☰ Menu</button>
+<nav class="menu-general" id="menu-general" aria-label="Menu général">
+<a href="index.html">Accueil</a><a href="a-propos.html">À propos</a><a href="contact.html">Nous contacter</a><a href="aide.html">Aide</a><a data-compte="eleve" href="connexion.html?role=eleve">🎒 Connexion élève</a><a data-compte="prof" href="connexion.html?role=teacher">🍎 Connexion enseignante</a></nav>
+</header>
+<script>document.currentScript.previousElementSibling.querySelector(".menu-bouton").onclick=function(){var o=this.getAttribute("aria-expanded")!=="true";this.setAttribute("aria-expanded",o);this.parentNode.classList.toggle("ouvert",o)}</script>
+<div class="mise-en-page">
+<aside class="barre-laterale">
+<p class="menu-titre">Activités</p>
+<nav class="menu-activites" aria-label="Catégories d’activités">
+<a href="sports.html" style="--c:var(--sports)"><span class="menu-icone" aria-hidden="true">⚽</span>Sports</a>
+<a href="informatique.html" style="--c:var(--informatique)"><span class="menu-icone" aria-hidden="true">💻</span>Informatique</a>
+<a href="mathematiques.html" style="--c:var(--mathematiques)"><span class="menu-icone" aria-hidden="true">📐</span>Mathématiques</a>
+<a href="francais.html" style="--c:var(--francais)" aria-current="page"><span class="menu-icone" aria-hidden="true">📖</span>Français</a>
+<a href="sciences.html" style="--c:var(--sciences)"><span class="menu-icone" aria-hidden="true">🔬</span>Sciences</a>
+<a href="defis.html" style="--c:var(--defis)"><span class="menu-icone" aria-hidden="true">🧩</span>Défis</a>
+<a href="jeux.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🎮</span>Jeux</a>
+<a class="sous-onglet" href="ile-aux-blocs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🏝️</span>Île aux blocs</a>
+<a class="sous-onglet" href="tempete-des-blocs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🌀</span>Tempête des blocs</a>
+<a class="sous-onglet" href="ile-aux-calculs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🔢</span>Île aux calculs</a>
+<a class="sous-onglet" href="village-des-amis.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🏘️</span>Village des amis</a>
+<a class="sous-onglet" href="ville-en-blocs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🏙️</span>La ville en blocs</a>
+<a class="sous-onglet" href="ateliers.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🧰</span>Ateliers</a>
+<a href="bons-moments-classe.html" style="--c:var(--vie)"><span class="menu-icone" aria-hidden="true">❤️</span>Vie de classe</a>
+<a href="galerie.html" style="--c:var(--vie)"><span class="menu-icone" aria-hidden="true">📸</span>Galerie</a>
+</nav>
+</aside>
+<div class="page">
+
+<section class="entete-page"><span>LIRE • COMPRENDRE • ÉCRIRE</span><h1>📖 Français</h1>
+<p>Des activités pour lire, écouter, comprendre et écrire de petits textes. Quand l’élève fait une erreur, une bulle lui dit quelle sorte d’erreur c’est et une capsule de grammaire l’aide à la corriger.</p></section>
+<main class="conteneur">
+<div class="tuiles">
+<a class="tuile" href="francais/cours.html" style="--c1:#3b3f9e;--c2:#9aa0e6;--fonce:#2b2f7a">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><rect x="14" y="14" width="44" height="54" rx="4" fill="#fff"/><g stroke="#3b3f9e" stroke-width="3" stroke-linecap="round"><line x1="22" y1="28" x2="50" y2="28"/><line x1="22" y1="38" x2="50" y2="38"/><line x1="22" y1="48" x2="42" y2="48"/></g><rect x="66" y="22" width="40" height="40" rx="20" fill="#fff" opacity=".85"/><text x="86" y="49" text-anchor="middle" font-size="20">🔊</text></svg></span>
+  <span class="tuile-texte"><strong>Cours de français</strong><small>Leçons et exercices, compréhension de textes (lire, écouter, comprendre, corriger) et rédaction en 3 niveaux.</small></span>
+  <span class="tuile-pied"><b>24 leçons · 18 textes</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=imprimerie" style="--c1:#8e3b8e;--c2:#e0aee0;--fonce:#8e3b8e">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🖨️</span></span>
+  <span class="tuile-texte"><strong>L’imprimerie des mots</strong><small>Lettres, syllabes, phrases, déterminants, accords et homophones.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</main><div class="retour"><a href="index.html">← Retour à l'accueil</a></div><footer class="site-footer"><span>EduCentre <b>│</b> De La Salle · Ottawa</span><span>Apprendre aujourd’hui pour demain</span></footer><script src="script.js"></script>
+</div>
+</div>
+
+</body></html>

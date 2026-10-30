@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mathématiques - Edu-Centre De La Salle</title>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="style.css"><link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<script src="compte.js" defer></script><link rel="stylesheet" href="apparence.css">
+<style>
+.math-sommaire{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 26px}
+.math-sommaire a{text-decoration:none;font-weight:800;font-size:16px;color:var(--mathematiques);background:#fff;border:2px solid var(--mathematiques);padding:8px 16px;border-radius:999px;transition:background .15s,color .15s}
+.math-sommaire a:hover,.math-sommaire a:focus{background:var(--mathematiques);color:#fff}
+.domaine{scroll-margin-top:90px;padding-top:6px;border-top:4px solid var(--mathematiques)}
+.domaine h2 .pastille-niveau{background:var(--mathematiques)}
+@media(max-width:560px){.math-sommaire a{font-size:14px;padding:7px 12px}}
+</style>
+<script src="menu-lateral.js" defer></script>
+<style>.illu-emo{font-size:58px;line-height:1;display:flex;align-items:center;justify-content:center;height:100%}</style>
+</head>
+<body class="cat-mathematiques theme-mathematiques">
+<header class="barre-haut">
+<a class="brand" href="index.html">Edu<span>Centre</span><small>De La Salle · Ottawa</small></a>
+<button class="menu-bouton" type="button" aria-expanded="false" aria-controls="menu-general">☰ Menu</button>
+<nav class="menu-general" id="menu-general" aria-label="Menu général">
+<a href="index.html">Accueil</a><a href="a-propos.html">À propos</a><a href="contact.html">Nous contacter</a><a href="aide.html">Aide</a><a data-compte="eleve" href="connexion.html?role=eleve">🎒 Connexion élève</a><a data-compte="prof" href="connexion.html?role=teacher">🍎 Connexion enseignante</a></nav>
+</header>
+<script>document.currentScript.previousElementSibling.querySelector(".menu-bouton").onclick=function(){var o=this.getAttribute("aria-expanded")!=="true";this.setAttribute("aria-expanded",o);this.parentNode.classList.toggle("ouvert",o)}</script>
+<div class="mise-en-page">
+<aside class="barre-laterale">
+<p class="menu-titre">Activités</p>
+<nav class="menu-activites" aria-label="Catégories d’activités">
+<a href="sports.html" style="--c:var(--sports)"><span class="menu-icone" aria-hidden="true">⚽</span>Sports</a>
+<a href="informatique.html" style="--c:var(--informatique)"><span class="menu-icone" aria-hidden="true">💻</span>Informatique</a>
+<a href="mathematiques.html" style="--c:var(--mathematiques)" aria-current="page"><span class="menu-icone" aria-hidden="true">📐</span>Mathématiques</a>
+<a href="francais.html" style="--c:var(--francais)"><span class="menu-icone" aria-hidden="true">📖</span>Français</a>
+<a href="sciences.html" style="--c:var(--sciences)"><span class="menu-icone" aria-hidden="true">🔬</span>Sciences</a>
+<a href="defis.html" style="--c:var(--defis)"><span class="menu-icone" aria-hidden="true">🧩</span>Défis</a>
+<a href="jeux.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🎮</span>Jeux</a>
+<a class="sous-onglet" href="ile-aux-blocs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🏝️</span>Île aux blocs</a>
+<a class="sous-onglet" href="tempete-des-blocs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🌀</span>Tempête des blocs</a>
+<a class="sous-onglet" href="ile-aux-calculs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🔢</span>Île aux calculs</a>
+<a class="sous-onglet" href="village-des-amis.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🏘️</span>Village des amis</a>
+<a class="sous-onglet" href="ville-en-blocs.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🏙️</span>La ville en blocs</a>
+<a class="sous-onglet" href="ateliers.html" style="--c:var(--jeux)"><span class="menu-icone" aria-hidden="true">🧰</span>Ateliers</a>
+<a href="bons-moments-classe.html" style="--c:var(--vie)"><span class="menu-icone" aria-hidden="true">❤️</span>Vie de classe</a>
+<a href="galerie.html" style="--c:var(--vie)"><span class="menu-icone" aria-hidden="true">📸</span>Galerie</a>
+</nav>
+</aside>
+<div class="page">
+
+
+
+<section class="entete-page math-entete">
+  <span>OBSERVER • CALCULER • SE REPÉRER</span>
+  <h1>📐 Activités de mathématiques</h1>
+  <p>Des activités concrètes pour développer des habiletés mathématiques utiles au quotidien. Chaque activité avance par niveaux, du plus facile au plus difficile.</p>
+</section>
+
+<main class="conteneur">
+<nav class="math-sommaire" aria-label="Domaines"><a href="#nombre">🔢 Sens du nombre</a><a href="#operations">➕ Opérations</a><a href="#algebre">🔁 Algèbre</a><a href="#spatial">📐 Sens spatial</a><a href="#finances">💰 Littératie financière</a><a href="#ateliers-maths">🧰 Ateliers</a><a href="#math-eval">🧑‍🏫 Évaluations</a></nav>
+<section class="jeux-niveau domaine" id="nombre" aria-labelledby="t-nombre">
+<h2 id="t-nombre"><span class="pastille-niveau">🔢 11 activités</span>Sens du nombre</h2>
+<p>Lire, écrire, composer, comparer et classer les nombres naturels.</p>
+<div class="tuiles">
+<a class="tuile" href="exercices/activite.html?a=fractions" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><path d="M34 40 L34 12 A28 28 0 0 1 62 40 Z" fill="#fff"/><circle cx="34" cy="40" r="28" fill="none" stroke="#fff" stroke-width="3"/><path d="M6 40 H62 M34 12 V68" stroke="#fff" stroke-width="3"/><text x="92" y="36" text-anchor="middle" font-size="22" font-weight="700" font-family="Arial" fill="#fff" opacity="1">3</text><path d="M80 44 H104" stroke="#fff" stroke-width="3"/><text x="92" y="66" text-anchor="middle" font-size="22" font-weight="700" font-family="Arial" fill="#fff" opacity="1">4</text></svg></span>
+  <span class="tuile-texte"><strong>Les fractions</strong><small>Parts égales, comparer, équivalentes, avec une vidéo.</small></span>
+  <span class="tuile-pied"><b>10 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=dizaines" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><rect x="18" y="14" width="8" height="44" fill="#fff"/><rect x="32" y="14" width="8" height="44" fill="#fff"/><rect x="46" y="14" width="8" height="44" fill="#fff"/><rect x="60" y="14" width="8" height="44" fill="#fff"/><text x="90" y="44" text-anchor="middle" font-size="18" font-weight="800" font-family="Arial" fill="#fff">40</text></svg></span>
+  <span class="tuile-texte"><strong>Les dizaines</strong><small>Compter de 10 en 10, avec une vidéo.</small></span>
+  <span class="tuile-pied"><b>8 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=centaines" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><rect x="12" y="14" width="30" height="30" fill="#fff"/><rect x="46" y="14" width="30" height="30" fill="#fff" opacity=".9"/><text x="98" y="36" text-anchor="middle" font-size="16" font-weight="800" font-family="Arial" fill="#fff">200</text><text x="60" y="70" text-anchor="middle" font-size="11" font-weight="700" font-family="Arial" fill="#fff">100, 200, 300…</text></svg></span>
+  <span class="tuile-texte"><strong>Les centaines</strong><small>Compter de 100 en 100, avec une vidéo.</small></span>
+  <span class="tuile-pied"><b>8 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=milliers" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><polygon points="20,26 32,14 66,14 54,26" fill="#fff" opacity=".7"/><polygon points="54,26 66,14 66,48 54,60" fill="#fff" opacity=".5"/><rect x="20" y="26" width="34" height="34" fill="#fff"/><text x="94" y="44" text-anchor="middle" font-size="15" font-weight="800" font-family="Arial" fill="#fff">1 000</text></svg></span>
+  <span class="tuile-texte"><strong>Les milliers</strong><small>Compter de 1 000 en 1 000, avec une vidéo.</small></span>
+  <span class="tuile-pied"><b>8 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=valeur" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><rect x="10" y="18" width="40" height="40" fill="#fff" opacity=".95"/><path d="M14 18V58M18 18V58M22 18V58M26 18V58M30 18V58M34 18V58M38 18V58M42 18V58M46 18V58M10 22H50M10 26H50M10 30H50M10 34H50M10 38H50M10 42H50M10 46H50M10 50H50M10 54H50" stroke="#2b7a3b" stroke-width=".6"/><rect x="60" y="18" width="6" height="40" fill="#fff"/><rect x="70" y="18" width="6" height="40" fill="#fff"/><rect x="80" y="18" width="6" height="40" fill="#fff"/><rect x="94" y="46" width="6" height="6" fill="#fff"/><rect x="103" y="46" width="6" height="6" fill="#fff"/><text x="30" y="74" text-anchor="middle" font-size="11" font-weight="700" font-family="Arial" fill="#fff">C</text><text x="73" y="74" text-anchor="middle" font-size="11" font-weight="700" font-family="Arial" fill="#fff">D</text><text x="102" y="74" text-anchor="middle" font-size="11" font-weight="700" font-family="Arial" fill="#fff">U</text></svg></span>
+  <span class="tuile-texte"><strong>Unités, dizaines, centaines : tout ensemble</strong><small>Le récapitulatif : la valeur de chaque chiffre, avec une vidéo.</small></span>
+  <span class="tuile-pied"><b>10 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=composer" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><text x="60" y="34" text-anchor="middle" font-size="26" font-weight="700" font-family="Arial" fill="#fff" opacity="1">345</text><text x="60" y="62" text-anchor="middle" font-size="15" font-weight="700" font-family="Arial" fill="#fff" opacity="0.9">300+40+5</text></svg></span>
+  <span class="tuile-texte"><strong>Composer et décomposer</strong><small>Les parties d’un nombre, avec une vidéo.</small></span>
+  <span class="tuile-pied"><b>7 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=egal" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><text x="60" y="34" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff" opacity="1">2 + 3</text><text x="60" y="64" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff" opacity="0.9">= 1 + 4</text></svg></span>
+  <span class="tuile-texte"><strong>Un nombre, plusieurs façons</strong><small>2 + 3, c’est aussi 1 + 4. Avec une vidéo.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=comparer" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><text x="30" y="50" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff" opacity="1">12</text><text x="60" y="52" text-anchor="middle" font-size="30" font-weight="700" font-family="Arial" fill="#fff" opacity="1">&lt;</text><text x="92" y="50" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff" opacity="1">45</text></svg></span>
+  <span class="tuile-texte"><strong>Comparer et ordonner</strong><small>Plus grand, plus petit, croissant, décroissant.</small></span>
+  <span class="tuile-pied"><b>8 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=situer" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><path d="M10 50 H110" stroke="#fff" stroke-width="3"/><path d="M20 44V56M60 44V56M100 44V56" stroke="#fff" stroke-width="3"/><text x="20" y="36" text-anchor="middle" font-size="14" font-weight="700" font-family="Arial" fill="#fff" opacity="1">30</text><text x="100" y="36" text-anchor="middle" font-size="14" font-weight="700" font-family="Arial" fill="#fff" opacity="1">40</text><circle cx="76" cy="50" r="7" fill="#ffd166"/><text x="76" y="76" text-anchor="middle" font-size="14" font-weight="700" font-family="Arial" fill="#fff" opacity="1">37</text></svg></span>
+  <span class="tuile-texte"><strong>Situer un nombre</strong><small>Entre deux nombres, dans une liste rangée.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=sortes" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><circle cx="18" cy="22" r="5" fill="#fff"/><circle cx="18" cy="36" r="5" fill="#fff"/><circle cx="18" cy="50" r="5" fill="#fff"/><circle cx="32" cy="22" r="5" fill="#fff"/><circle cx="32" cy="36" r="5" fill="#fff"/><circle cx="32" cy="50" r="5" fill="#fff"/><circle cx="46" cy="22" r="5" fill="#fff"/><circle cx="46" cy="36" r="5" fill="#fff"/><circle cx="46" cy="50" r="5" fill="#fff"/><circle cx="90" cy="22" r="5" fill="#fff" opacity=".9"/><circle cx="83" cy="36" r="5" fill="#fff" opacity=".9"/><circle cx="97" cy="36" r="5" fill="#fff" opacity=".9"/><circle cx="76" cy="50" r="5" fill="#fff" opacity=".9"/><circle cx="90" cy="50" r="5" fill="#fff" opacity=".9"/><circle cx="104" cy="50" r="5" fill="#fff" opacity=".9"/></svg></span>
+  <span class="tuile-texte"><strong>Sortes de nombres</strong><small>Pairs, impairs, carrés, triangulaires, premiers, composés.</small></span>
+  <span class="tuile-pied"><b>8 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=proprietes" style="--c1:#0b7480;--c2:#5cc2cc;--fonce:#08565f">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><text x="60" y="32" text-anchor="middle" font-size="16" font-weight="700" font-family="Arial" fill="#fff" opacity="1">7 + 5 = 5 + 7</text><text x="60" y="56" text-anchor="middle" font-size="16" font-weight="700" font-family="Arial" fill="#fff" opacity="0.9">n × 0 = 0</text></svg></span>
+  <span class="tuile-texte"><strong>Propriétés des nombres naturels</strong><small>Avant, après, l’ordre, 0 et 1.</small></span>
+  <span class="tuile-pied"><b>7 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+<section class="jeux-niveau domaine" id="operations" aria-labelledby="t-operations">
+<h2 id="t-operations"><span class="pastille-niveau">➕ 6 activités</span>Opérations</h2>
+<p>Additionner, soustraire, multiplier et partager, avec des stratégies.</p>
+<div class="tuiles">
+<a class="tuile" href="exercices/activite.html?a=calculs" style="--c1:#137f95;--c2:#6cc4d6;--fonce:#0d5d6e">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><text x="60" y="56" text-anchor="middle" font-size="40" font-weight="700" font-family="Arial" fill="#fff">2+3</text><circle cx="18" cy="16" r="5" fill="#fff" opacity=".6"/><circle cx="104" cy="66" r="7" fill="#fff" opacity=".5"/></svg></span>
+  <span class="tuile-texte"><strong>Calculs arithmétiques</strong><small>Additionner, soustraire, multiplier.</small></span>
+  <span class="tuile-pied"><b>11 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=completer" style="--c1:#137f95;--c2:#6cc4d6;--fonce:#0d5d6e">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><text x="30" y="36" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff" opacity="1">7 +</text><rect x="48" y="16" width="26" height="26" rx="5" fill="#ffd166"/><text x="61" y="36" text-anchor="middle" font-size="20" font-weight="700" font-family="Arial" fill="#fff" opacity="1">?</text><text x="96" y="36" text-anchor="middle" font-size="22" font-weight="700" font-family="Arial" fill="#fff" opacity="1">= 12</text><text x="60" y="68" text-anchor="middle" font-size="18" font-weight="700" font-family="Arial" fill="#fff" opacity="0.9">15 − ? = 9</text></svg></span>
+  <span class="tuile-texte"><strong>Compléter des additions et des soustractions</strong><small>Le nombre ou le chiffre qui manque, avec une vidéo.</small></span>
+  <span class="tuile-pied"><b>9 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=regrouper" style="--c1:#137f95;--c2:#6cc4d6;--fonce:#0d5d6e">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><text x="70" y="20" text-anchor="middle" font-size="13" font-weight="700" font-family="Arial" fill="#fff" opacity=".9">1</text><text x="84" y="38" text-anchor="end" font-size="20" font-weight="700" font-family="Arial" fill="#fff">47</text><text x="42" y="58" font-size="20" font-weight="700" font-family="Arial" fill="#fff">+</text><text x="84" y="58" text-anchor="end" font-size="20" font-weight="700" font-family="Arial" fill="#fff">38</text><path d="M40 64 H90" stroke="#fff" stroke-width="3" stroke-linecap="round"/><text x="84" y="80" text-anchor="end" font-size="16" font-weight="700" font-family="Arial" fill="#fff" opacity=".95">85</text></svg></span>
+  <span class="tuile-texte"><strong>Additionner et soustraire en regroupant</strong><small>Calculer en colonnes, avec une vidéo.</small></span>
+  <span class="tuile-pied"><b>9 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=division" style="--c1:#137f95;--c2:#6cc4d6;--fonce:#0d5d6e">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><circle cx="14" cy="24" r="5" fill="#fff"/><circle cx="28" cy="24" r="5" fill="#fff"/><circle cx="42" cy="24" r="5" fill="#fff"/><circle cx="56" cy="24" r="5" fill="#fff"/><circle cx="14" cy="38" r="5" fill="#fff"/><circle cx="28" cy="38" r="5" fill="#fff"/><circle cx="42" cy="38" r="5" fill="#fff"/><circle cx="56" cy="38" r="5" fill="#fff"/><circle cx="14" cy="52" r="5" fill="#fff"/><circle cx="28" cy="52" r="5" fill="#fff"/><circle cx="42" cy="52" r="5" fill="#fff"/><circle cx="56" cy="52" r="5" fill="#fff"/><text x="90" y="46" text-anchor="middle" font-size="18" font-weight="700" font-family="Arial" fill="#fff" opacity="1">12 ÷ 3</text><text x="90" y="68" text-anchor="middle" font-size="18" font-weight="700" font-family="Arial" fill="#fff" opacity="0.9">= 4</text></svg></span>
+  <span class="tuile-texte"><strong>La division</strong><small>Partager, faire des groupes, le reste, avec une vidéo.</small></span>
+  <span class="tuile-pied"><b>10 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=partage" style="--c1:#137f95;--c2:#6cc4d6;--fonce:#0d5d6e">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><circle cx="22" cy="24" r="8" fill="#fff"/><circle cx="40" cy="24" r="8" fill="#fff"/><circle cx="22" cy="44" r="8" fill="#fff"/><circle cx="40" cy="44" r="8" fill="#fff"/><path d="M52 34 H66" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M62 28 L68 34 L62 40" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="84" cy="24" r="7" fill="#fff" opacity=".9"/><circle cx="84" cy="44" r="7" fill="#fff" opacity=".9"/><circle cx="104" cy="24" r="7" fill="#fff" opacity=".9"/><circle cx="104" cy="44" r="7" fill="#fff" opacity=".9"/></svg></span>
+  <span class="tuile-texte"><strong>Partager équitablement</strong><small>Partager en parts égales.</small></span>
+  <span class="tuile-pied"><b>4 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="blocs-de-couleur.html" style="--c1:#137f95;--c2:#6cc4d6;--fonce:#0d5d6e">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><rect x="20" y="44" width="18" height="18" rx="3" fill="#fff"/><rect x="40" y="44" width="18" height="18" rx="3" fill="#fff" opacity=".8"/><rect x="60" y="44" width="18" height="18" rx="3" fill="#fff"/><rect x="30" y="24" width="18" height="18" rx="3" fill="#fff" opacity=".9"/><rect x="50" y="24" width="18" height="18" rx="3" fill="#fff"/><rect x="40" y="4" width="18" height="18" rx="3" fill="#fff" opacity=".85"/><text x="98" y="58" text-anchor="middle" font-size="18" font-weight="700" font-family="Arial" fill="#fff">3+2</text></svg></span>
+  <span class="tuile-texte"><strong>Blocs de couleur</strong><small>Construire avec des blocs, compter et calculer.</small></span>
+  <span class="tuile-pied"><b>5 jeux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+<section class="jeux-niveau domaine" id="algebre" aria-labelledby="t-algebre">
+<h2 id="t-algebre"><span class="pastille-niveau">🔁 2 activités</span>Algèbre : suites et relations</h2>
+<p>Trouver une régularité, la prolonger et la représenter.</p>
+<div class="tuiles">
+<a class="tuile" href="exercices/activite.html?a=suites" style="--c1:#1a6f7d;--c2:#7fbfca;--fonce:#12525c">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><circle cx="16" cy="40" r="13" fill="#fff" opacity="0.95"/><text x="16" y="46" text-anchor="middle" font-size="16" font-weight="700" font-family="Arial" fill="#a83a26">2</text><circle cx="45" cy="40" r="13" fill="#fff" opacity="0.95"/><text x="45" y="46" text-anchor="middle" font-size="16" font-weight="700" font-family="Arial" fill="#a83a26">4</text><circle cx="74" cy="40" r="13" fill="#fff" opacity="0.95"/><text x="74" y="46" text-anchor="middle" font-size="16" font-weight="700" font-family="Arial" fill="#a83a26">6</text><circle cx="103" cy="40" r="13" fill="#fff" opacity="0.55"/><text x="103" y="46" text-anchor="middle" font-size="16" font-weight="700" font-family="Arial" fill="#a83a26">?</text></svg></span>
+  <span class="tuile-texte"><strong>Compléter une suite</strong><small>Trouver le nombre suivant.</small></span>
+  <span class="tuile-pied"><b>5 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=droites" style="--c1:#1a6f7d;--c2:#7fbfca;--fonce:#12525c">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><g stroke="#fff" stroke-width="1.5" opacity=".5"><line x1="20" y1="8" x2="20" y2="72"/><line x1="40" y1="8" x2="40" y2="72"/><line x1="60" y1="8" x2="60" y2="72"/><line x1="80" y1="8" x2="80" y2="72"/><line x1="100" y1="8" x2="100" y2="72"/><line x1="20" y1="24" x2="104" y2="24"/><line x1="20" y1="40" x2="104" y2="40"/><line x1="20" y1="56" x2="104" y2="56"/></g><line x1="20" y1="72" x2="108" y2="72" stroke="#fff" stroke-width="3"/><line x1="20" y1="72" x2="20" y2="4" stroke="#fff" stroke-width="3"/><line x1="20" y1="66" x2="104" y2="10" stroke="#46610f" stroke-width="4" stroke-linecap="round"/><circle cx="40" cy="52.7" r="5" fill="#fff"/><circle cx="60" cy="39.3" r="5" fill="#fff"/><circle cx="80" cy="26" r="5" fill="#fff"/></svg></span>
+  <span class="tuile-texte"><strong>La droite · niveau avancé</strong><small>Règle, table de valeurs et tracé d’une droite.</small></span>
+  <span class="tuile-pied"><b>10 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+<section class="jeux-niveau domaine" id="spatial" aria-labelledby="t-spatial">
+<h2 id="t-spatial"><span class="pastille-niveau">📐 5 activités</span>Sens spatial : formes, mesure et repérage</h2>
+<p>Les formes, les longueurs, l’heure et les positions sur un plan.</p>
+<div class="tuiles">
+<a class="tuile" href="exercices/activite.html?a=formes" style="--c1:#0d8a7e;--c2:#69cfc2;--fonce:#08665d">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><polygon points="18,62 40,22 62,62" fill="#fff" opacity=".95"/><circle cx="78" cy="42" r="20" fill="#fff" opacity=".75"/><rect x="88" y="30" width="26" height="26" rx="3" fill="#fff" opacity=".9" transform="rotate(12 101 43)"/></svg></span>
+  <span class="tuile-texte"><strong>Identifier les formes</strong><small>Reconnaître et nommer les formes.</small></span>
+  <span class="tuile-pied"><b>7 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=mesures" style="--c1:#0d8a7e;--c2:#69cfc2;--fonce:#08665d">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><rect x="12" y="30" width="96" height="22" rx="4" fill="#fff"/><line x1="20" y1="30" x2="20" y2="46" stroke="#a8345d" stroke-width="2"/><line x1="30" y1="30" x2="30" y2="42" stroke="#a8345d" stroke-width="2"/><line x1="40" y1="30" x2="40" y2="46" stroke="#a8345d" stroke-width="2"/><line x1="50" y1="30" x2="50" y2="42" stroke="#a8345d" stroke-width="2"/><line x1="60" y1="30" x2="60" y2="46" stroke="#a8345d" stroke-width="2"/><line x1="70" y1="30" x2="70" y2="42" stroke="#a8345d" stroke-width="2"/><line x1="80" y1="30" x2="80" y2="46" stroke="#a8345d" stroke-width="2"/><line x1="90" y1="30" x2="90" y2="42" stroke="#a8345d" stroke-width="2"/><line x1="100" y1="30" x2="100" y2="46" stroke="#a8345d" stroke-width="2"/><rect x="12" y="60" width="60" height="8" rx="4" fill="#fff" opacity=".7"/></svg></span>
+  <span class="tuile-texte"><strong>Mesurer et comparer</strong><small>Comparer des longueurs.</small></span>
+  <span class="tuile-pied"><b>5 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=heure" style="--c1:#0d8a7e;--c2:#69cfc2;--fonce:#08665d">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><circle cx="60" cy="40" r="30" fill="#fff"/><line x1="60" y1="40" x2="60" y2="20" stroke="#a8521a" stroke-width="5" stroke-linecap="round"/><line x1="60" y1="40" x2="76" y2="46" stroke="#a8521a" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="40" r="4" fill="#a8521a"/></svg></span>
+  <span class="tuile-texte"><strong>Savoir lire l'heure</strong><small>Lire l’heure sur une horloge.</small></span>
+  <span class="tuile-pied"><b>5 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=trajets" style="--c1:#0d8a7e;--c2:#69cfc2;--fonce:#08665d">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><g stroke="#fff" stroke-width="2" opacity=".55"><line x1="16" y1="8" x2="16" y2="72"/><line x1="38" y1="8" x2="38" y2="72"/><line x1="60" y1="8" x2="60" y2="72"/><line x1="82" y1="8" x2="82" y2="72"/><line x1="104" y1="8" x2="104" y2="72"/><line x1="16" y1="8" x2="104" y2="8"/><line x1="16" y1="24" x2="104" y2="24"/><line x1="16" y1="40" x2="104" y2="40"/><line x1="16" y1="56" x2="104" y2="56"/><line x1="16" y1="72" x2="104" y2="72"/></g><path d="M27 64 H71 V24" stroke="#fff" stroke-width="5" fill="none" stroke-dasharray="6 5" stroke-linecap="round"/><circle cx="71" cy="18" r="9" fill="#fff"/><circle cx="71" cy="18" r="3.5" fill="#1f7350"/></svg></span>
+  <span class="tuile-texte"><strong>Lire des positions sur un plan</strong><small>Du quadrillage au plan cartésien, avec les nombres négatifs.</small></span>
+  <span class="tuile-pied"><b>14 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="exercices/activite.html?a=dessins" style="--c1:#0d8a7e;--c2:#69cfc2;--fonce:#08665d">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><g stroke="#fff" stroke-width="1.5" opacity=".5"><line x1="20" y1="8" x2="20" y2="72"/><line x1="36" y1="8" x2="36" y2="72"/><line x1="52" y1="8" x2="52" y2="72"/><line x1="68" y1="8" x2="68" y2="72"/><line x1="84" y1="8" x2="84" y2="72"/><line x1="20" y1="24" x2="100" y2="24"/><line x1="20" y1="40" x2="100" y2="40"/><line x1="20" y1="56" x2="100" y2="56"/></g><line x1="20" y1="72" x2="104" y2="72" stroke="#fff" stroke-width="3"/><line x1="20" y1="72" x2="20" y2="4" stroke="#fff" stroke-width="3"/><path d="M36 64 H68 V40 L52 18 L36 40 Z" fill="#fff" fill-opacity=".35" stroke="#2f6f3a" stroke-width="3.5" stroke-linejoin="round"/><circle cx="36" cy="64" r="4" fill="#fff"/><circle cx="68" cy="64" r="4" fill="#fff"/><circle cx="68" cy="40" r="4" fill="#fff"/><circle cx="52" cy="18" r="4" fill="#fff"/><circle cx="36" cy="40" r="4" fill="#fff"/><rect x="88" y="30" width="26" height="34" rx="3" fill="#fff"/><line x1="88" y1="41" x2="114" y2="41" stroke="#2f6f3a" stroke-width="1.5"/><line x1="88" y1="52" x2="114" y2="52" stroke="#2f6f3a" stroke-width="1.5"/><line x1="101" y1="30" x2="101" y2="64" stroke="#2f6f3a" stroke-width="1.5"/></svg></span>
+  <span class="tuile-texte"><strong>Dessiner sur un plan</strong><small>Lire les points d’un dessin et remplir la table de valeurs.</small></span>
+  <span class="tuile-pied"><b>10 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+<section class="jeux-niveau domaine" id="finances" aria-labelledby="t-finances">
+<h2 id="t-finances"><span class="pastille-niveau">💰 1 activité</span>Littératie financière</h2>
+<p>L’argent : acheter, payer et rendre la monnaie.</p>
+<div class="tuiles">
+<a class="tuile" href="exercices/activite.html?a=finances" style="--c1:#2f7f86;--c2:#94cbd0;--fonce:#215e63">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><rect x="14" y="24" width="56" height="32" rx="5" fill="#fff"/><circle cx="42" cy="40" r="9" fill="#e6a91d"/><circle cx="84" cy="56" r="14" fill="#fff"/><circle cx="96" cy="34" r="12" fill="#fff" opacity=".85"/><text x="84" y="61" text-anchor="middle" font-size="14" font-weight="700" font-family="Arial" fill="#7f5a00">$</text></svg></span>
+  <span class="tuile-texte"><strong>Gestion des finances</strong><small>Acheter, payer, rendre la monnaie.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+
+
+<section class="jeux-niveau" aria-labelledby="math-eval" style="margin-top:28px">
+<h2 id="math-eval"><span class="pastille-niveau">Enseignante</span>Évaluations adaptées</h2>
+<p>Évaluations à faire passer à un élève, une question à la fois, avec un plan visuel et des pauses (adaptées aux élèves TSA). Un rapport imprimable est produit à la fin.</p>
+<div class="tuiles">
+<a class="tuile" href="evaluation/calcul.html" style="--c1:#3f7a64;--c2:#7fb59e;--fonce:#284a40">
+  <span class="tuile-illu" aria-hidden="true"><svg viewBox="0 0 120 80"><rect x="10" y="14" width="48" height="22" rx="4" fill="none" stroke="#fff" stroke-width="2"/><g fill="#fff"><circle cx="17" cy="20" r="3.4"/><circle cx="26" cy="20" r="3.4"/><circle cx="35" cy="20" r="3.4"/><circle cx="44" cy="20" r="3.4"/><circle cx="53" cy="20" r="3.4"/><circle cx="17" cy="30" r="3.4"/><circle cx="26" cy="30" r="3.4"/></g><circle cx="35" cy="30" r="3.4" fill="#e8c774"/><text x="34" y="64" text-anchor="middle" font-size="18" font-weight="700" font-family="Arial" fill="#fff">3×4</text><rect x="72" y="12" width="38" height="56" rx="5" fill="#fff"/><rect x="82" y="8" width="18" height="8" rx="2" fill="#e8c774"/><path d="M79 30 l4 4 7-8 M79 44 l4 4 7-8" stroke="#3f7a64" stroke-width="3" fill="none" stroke-linecap="round"/><line x1="93" y1="31" x2="104" y2="31" stroke="#3f7a64" stroke-width="2.5"/><line x1="93" y1="45" x2="104" y2="45" stroke="#3f7a64" stroke-width="2.5"/><line x1="80" y1="58" x2="104" y2="58" stroke="#3f7a64" stroke-width="2.5"/></svg></span>
+  <span class="tuile-texte"><strong>Évaluation de calcul</strong><small>+ − × ÷ : de 1 à 10 jusqu’à 100, au choix. Rapport à imprimer.</small></span>
+  <span class="tuile-pied"><b>8 parties</b><span>Commencer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+
+<section class="jeux-niveau domaine" id="ateliers-maths" aria-labelledby="t-ateliers-maths">
+<h2 id="t-ateliers-maths">🧰 Ateliers de maths</h2>
+<p>Apprendre en manipulant : l’argent, les mesures, les fractions, le plan, l’heure, les données et les formes.</p>
+<div class="tuiles">
+<a class="tuile" href="ateliers/jeu.html?j=magasin" style="--c1:#2e7d4f;--c2:#a8dcb9;--fonce:#2e7d4f">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🛒</span></span>
+  <span class="tuile-texte"><strong>Le magasin de la ville</strong><small>Payer avec l’argent canadien, rendre la monnaie, respecter un budget.</small></span>
+  <span class="tuile-pied"><b>7 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=chantier" style="--c1:#a35a0b;--c2:#f2c58f;--fonce:#a35a0b">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🏗️</span></span>
+  <span class="tuile-texte"><strong>Le chantier des mesures</strong><small>Mesurer avec une règle, calculer le périmètre et l’aire, construire des rectangles.</small></span>
+  <span class="tuile-pied"><b>7 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=pizzeria" style="--c1:#c0392b;--c2:#f3aaa1;--fonce:#c0392b">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🍕</span></span>
+  <span class="tuile-texte"><strong>La pizzeria des fractions</strong><small>Couper les pizzas en parts égales et servir les commandes en fractions.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=tresor" style="--c1:#2e6b8a;--c2:#a3cfe3;--fonce:#2e6b8a">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🧭</span></span>
+  <span class="tuile-texte"><strong>La chasse au trésor</strong><small>Trouver une case sur un plan, suivre des déplacements, placer des coordonnées (x, y).</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=autobus" style="--c1:#b07d12;--c2:#f2d68a;--fonce:#b07d12">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🚌</span></span>
+  <span class="tuile-texte"><strong>L’horaire de l’autobus</strong><small>Lire l’heure, régler l’horloge, calculer une durée, lire un horaire.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=enquete" style="--c1:#2364aa;--c2:#9fc0ec;--fonce:#2364aa">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">📊</span></span>
+  <span class="tuile-texte"><strong>L’enquête de la classe</strong><small>Marques de pointage, pictogrammes et diagrammes à bandes.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+<a class="tuile" href="ateliers/jeu.html?j=geoplan" style="--c1:#7a5ad8;--c2:#c9b8f4;--fonce:#7a5ad8">
+  <span class="tuile-illu" aria-hidden="true"><span class="illu-emo">🔷</span></span>
+  <span class="tuile-texte"><strong>L’atelier des formes</strong><small>Géoplan, côtés et sommets, symétrie, reproduction et translation.</small></span>
+  <span class="tuile-pied"><b>6 niveaux</b><span>Jouer <span aria-hidden="true">→</span></span></span>
+</a>
+</div>
+</section>
+</main>
+
+<div class="retour"><a href="index.html">← Retour à l'accueil</a></div>
+<footer class="site-footer"><span>EduCentre <b>│</b> De La Salle · Ottawa</span><span>Apprendre aujourd’hui pour demain</span></footer>
+<script src="script.js"></script>
+
+</div>
+</div>
+</body>
+</html>
