@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Évaluation + et − · EduCentre</title>
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Évaluation adaptée (TSA) : une seule chose à l'écran à la fois, un plan visuel toujours visible, pas de chrono affiché,
+   pas de son ni d'animation sans clic, rétroaction neutre pendant l'évaluation, bouton pause toujours accessible.
+   Même palette calme que les jeux de blocs (ardoise foncée, sauge, bleu, lavande, or). */
+:root{
+  --fond:#1e2b38; --fond2:#253545; --carte:#2b3d4f; --ligne:#3f5568; --ligne-p:#34495c; --texte:#eef3f6; --doux:#bccbd6;
+  --or:#e8c774; --sauge:#7fb59e; --sauge-f:#3f7a64; --sauge-p:#284a40; --bleu:#8fb3d6; --bleu-f:#3e6a90; --bleu-p:#27405a;
+  --lav:#b3a5d8; --lav-p:#373159; --corail:#e58f7b;
+  --titre:"Baloo 2","Atkinson Hyperlegible",Arial,sans-serif; --ui:"Atkinson Hyperlegible",Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fond);color:var(--texte);font-family:var(--ui);font-size:19px;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding-block:16px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:16px}
+h1,h2,h3{font-family:var(--titre);font-weight:800;margin:0;text-wrap:balance}
+h1{display:inline-block;align-self:flex-start;font-size:32px;background:var(--sauge-f);border:2px solid var(--sauge);color:#fff;border-radius:14px;padding:2px 18px;box-shadow:0 3px 8px rgba(0,0,0,.35)}
+h2{font-size:28px}
+p{margin:0}
+.doux{color:var(--doux)}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--or);outline-offset:3px}
+.carte{background:var(--fond2);border:2px solid var(--ligne);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:10px 22px;border-radius:14px;border:2px solid var(--ligne);background:var(--carte);color:var(--texte);font-weight:700;font-size:19px;box-shadow:0 2px 0 #142029}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.btn.vert{background:var(--sauge-f);border-color:var(--sauge);color:#fff;box-shadow:0 3px 0 #23463a}
+.btn.bleu{background:var(--bleu-f);border-color:var(--bleu);color:#fff;box-shadow:0 3px 0 #233d55}
+.btn.petit{min-height:44px;padding:6px 14px;font-size:16px}
+.btn[disabled]{opacity:.45;cursor:default}
+.rang{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ecoute{flex:none;width:52px;height:52px;border-radius:50%;border:2px solid var(--ligne);background:var(--carte);color:var(--texte);font-size:22px;display:grid;place-items:center;box-shadow:0 2px 0 #142029}
+
+/* Plan visuel (toujours visible pendant l'évaluation) */
+.plan{display:flex;gap:6px;align-items:stretch;padding:8px;border-radius:16px;background:var(--fond2);border:2px solid var(--ligne)}
+.plan .p{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 6px;border-radius:12px;color:var(--doux);font-weight:700;font-size:16px;text-align:center}
+.plan .p .i{font-size:22px}
+.plan .p.fait{color:var(--sauge)}
+.plan .p.ici{background:var(--sauge-f);color:#fff}
+.plan .fl{align-self:center;color:var(--ligne)}
+.barre-haut{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
+.pastilles{display:flex;gap:6px;flex-wrap:wrap}
+.pastilles i{width:18px;height:18px;border-radius:50%;border:2px solid var(--ligne);display:block}
+.pastilles i.ok{background:var(--sauge);border-color:var(--sauge)}
+.pastilles i.ici{border-color:var(--or);background:var(--or)}
+
+/* Accueil */
+.parties{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.partie{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:14px 16px;border-radius:16px;border:2px solid var(--ligne);background:var(--carte);color:var(--texte);text-align:left;box-shadow:0 2px 0 #142029}
+.partie b{font-family:var(--titre);font-size:22px;line-height:1.1}
+.partie small{color:var(--doux);font-size:15px}
+.partie .sig{font-family:var(--titre);font-size:26px;font-weight:800;padding:0 10px;border-radius:10px;background:var(--sauge);color:#13261f}
+.partie.b .sig{background:var(--bleu);color:#13233a}
+.partie.ab .sig{background:var(--lav);color:#221b3d}
+.partie[aria-pressed="true"]{outline:3px solid var(--or);outline-offset:2px;background:var(--fond2)}
+label.champ{display:flex;flex-direction:column;gap:6px;font-weight:700}
+input[type=text]{min-height:52px;padding:8px 14px;border-radius:12px;border:2px solid var(--ligne);background:var(--carte);color:var(--texte);font-size:20px}
+details.reglages{border:2px dashed var(--ligne);border-radius:16px;padding:12px 16px;background:var(--fond)}
+details.reglages summary{cursor:pointer;font-weight:700;color:var(--doux)}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.opt{display:flex;flex-direction:column;gap:6px;font-size:16px;color:var(--doux)}
+.seg{display:inline-flex;flex-wrap:wrap;border:2px solid var(--ligne);border-radius:12px;overflow:hidden}
+.seg button{border:0;background:var(--carte);color:var(--doux);padding:8px 14px;font-weight:700;font-size:16px;min-height:44px}
+.seg button[aria-pressed="true"]{background:var(--sauge-f);color:#fff}
+
+/* Question */
+.q-zone{align-items:center;text-align:center;gap:18px;padding:24px 20px}
+.consigne{font-size:20px;color:var(--doux)}
+.calcul{font-family:var(--titre);font-weight:800;font-size:76px;line-height:1;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:.25em;flex-wrap:wrap}
+.calcul .trou{min-width:1.3em;padding:0 .15em;border-bottom:6px solid var(--or);color:var(--or)}
+.cadres{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.cadre10{display:grid;grid-template-columns:repeat(5,34px);grid-template-rows:repeat(2,34px);gap:4px;padding:6px;border-radius:10px;background:var(--fond);border:2px solid var(--ligne)}
+.cadre10 span{border-radius:50%;border:2px solid var(--ligne-p);position:relative}
+.cadre10 span.a{background:var(--bleu);border-color:var(--bleu)}
+.cadre10 span.b{background:var(--or);border-color:var(--or)}
+.cadre10 span.x{background:var(--bleu);border-color:var(--bleu);opacity:.35}
+.cadre10 span.x::after{content:"";position:absolute;left:-4px;right:-4px;top:50%;height:4px;background:var(--corail);transform:rotate(-45deg);border-radius:2px}
+.legende{font-size:15px;color:var(--doux);display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.legende i{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:4px}
+.choix{display:grid;grid-template-columns:repeat(3,minmax(0,140px));gap:14px;justify-content:center;width:100%}
+.choix button{min-height:96px;border-radius:18px;border:3px solid var(--ligne);background:var(--carte);color:var(--texte);font-family:var(--titre);font-weight:800;font-size:48px;box-shadow:0 3px 0 #142029}
+.choix button:hover{border-color:var(--bleu)}
+.choix button[aria-pressed="true"]{border-color:var(--or);background:var(--bleu-p)}
+.clavier{display:grid;grid-template-columns:repeat(5,minmax(0,64px));gap:10px;justify-content:center}
+.clavier button{min-height:64px;border-radius:14px;border:2px solid var(--ligne);background:var(--carte);color:var(--texte);font-family:var(--titre);font-weight:800;font-size:30px;box-shadow:0 2px 0 #142029}
+.clavier button.efface{font-size:20px}
+.ecran{min-width:140px;min-height:84px;border-radius:16px;border:3px solid var(--or);background:var(--fond);font-family:var(--titre);font-weight:800;font-size:56px;display:grid;place-items:center}
+.merci{min-height:28px;font-weight:700;color:var(--sauge)}
+
+/* Pause */
+.pause{align-items:center;text-align:center;padding:36px 20px}
+.souffle{width:150px;height:150px;border-radius:50%;background:var(--sauge-p);border:4px solid var(--sauge);display:grid;place-items:center;font-weight:700;color:var(--texte);animation:souffle 8s ease-in-out infinite}
+@keyframes souffle{0%,100%{transform:scale(.8)}50%{transform:scale(1.05)}}
+
+/* Fin et rapport */
+.etoile{font-size:72px;line-height:1}
+.resume{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.tuile{background:var(--carte);border:2px solid var(--ligne);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.tuile .t{font-size:15px;color:var(--doux)}
+.tuile .v{font-family:var(--titre);font-weight:800;font-size:36px;line-height:1.1}
+.tuile .n{font-size:15px;font-weight:700;color:var(--or)}
+.obs{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.table-wrap{overflow-x:auto;border-radius:14px;border:2px solid var(--ligne)}
+table{border-collapse:collapse;width:100%;font-size:16px;min-width:560px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--ligne-p);font-variant-numeric:tabular-nums}
+th{background:var(--carte);color:var(--doux);font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+td.ok{color:var(--sauge);font-weight:700}
+td.non{color:var(--corail);font-weight:700}
+.note{font-size:14px;color:var(--doux)}
+.compte-carte{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:16px;border:2px solid var(--ligne);background:var(--carte)}
+.compte-carte.ok{border-color:var(--sauge);background:var(--sauge-p)}
+.compte-carte.attention{border-color:var(--or)}
+.compte-carte .ico-c{font-size:30px;line-height:1}
+.compte-carte div{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.lien-btn{border:0;background:none;color:var(--doux);text-decoration:underline;text-underline-offset:3px;padding:0;font-size:15px}
+a.btn{text-decoration:none}
+.choix-parties{display:flex;flex-direction:column;gap:12px}
+.grp{display:flex;flex-direction:column;gap:8px}
+.grp-titre{display:flex;align-items:center;gap:10px;font-weight:700;margin:0}
+.grp .sig{font-family:var(--titre);font-size:22px;font-weight:800;padding:0 10px;border-radius:10px;background:var(--sauge);color:#13261f}
+.grp.fd .sig{background:var(--bleu);color:#13233a}
+.puces{display:flex;flex-wrap:wrap;gap:8px}
+.puce-p{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:8px 16px;border-radius:14px;border:2px solid var(--ligne);background:var(--carte);color:var(--texte);font-weight:700;font-size:17px;box-shadow:0 2px 0 #142029}
+.puce-p .coche{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;border:2px solid var(--ligne);color:transparent;font-size:14px}
+.grp.pm .puce-p[aria-pressed="true"]{background:var(--sauge-p);border-color:var(--sauge)}
+.grp.fd .puce-p[aria-pressed="true"]{background:var(--bleu-p);border-color:var(--bleu)}
+.puce-p[aria-pressed="true"] .coche{background:var(--or);border-color:var(--or);color:#1e2b38}
+.puce-p.tout{background:transparent;border-style:dashed;color:var(--doux)}
+.grille-pts{display:flex;flex-direction:column;gap:6px;padding:10px;border-radius:12px;background:var(--fond);border:2px solid var(--ligne)}
+.grille-pts .rangee{display:flex;gap:6px}
+.grille-pts span{width:20px;height:20px;border-radius:50%;background:var(--bleu)}
+.porte{border:2px dashed var(--ligne);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;background:var(--fond)}
+textarea{width:100%;min-height:90px;padding:10px 12px;border-radius:12px;border:2px solid var(--ligne);background:var(--carte);color:var(--texte);font:inherit;font-size:17px}
+
+@media (max-width:640px){
+  h1{font-size:26px}
+  .parties{grid-template-columns:1fr}
+  .opts{grid-template-columns:1fr}
+  .calcul{font-size:54px}
+  .cadre10{grid-template-columns:repeat(5,24px);grid-template-rows:repeat(2,24px);gap:3px}
+  .choix button{min-height:80px;font-size:40px}
+  .clavier{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .plan .p .t{display:none}
+}
+@media (prefers-reduced-motion:reduce){.souffle{animation:none}*{transition:none!important}}
+
+/* ---------- Impression du rapport : fond blanc, encre noire, seulement le rapport ---------- */
+.imprime-seul{display:none}
+.retour-site{color:var(--doux);font-weight:700;text-decoration:none;align-self:flex-start}
+.retour-site:hover{color:var(--texte)}
+@page{size:letter portrait;margin:14mm 12mm}
+@media print{
+  :root{--fond:#fff;--fond2:#fff;--carte:#fff;--ligne:#999;--ligne-p:#ccc;--texte:#000;--doux:#333;--or:#000;--sauge:#1f5c45;--corail:#9b2c16;color-scheme:light}
+  body{background:#fff;color:#000;font-size:12pt}
+  .wrap{max-width:none;padding:0;gap:10px}
+  .no-print,.rang button,.btn,.retour-site,.merci{display:none!important}
+  h1{background:none;border:0;box-shadow:none;color:#000;padding:0;font-size:22pt}
+  .carte{border:0;box-shadow:none;padding:0;gap:10px}
+  .tuile{border:1px solid #999;box-shadow:none;padding:8px 10px;break-inside:avoid}
+  .obs{gap:2px}
+  .tuile .v{font-size:22pt}
+  .table-wrap{overflow:visible;border:1px solid #999}
+  table{min-width:0;font-size:10.5pt}
+  th{background:#eee;color:#000}
+  th,td{padding:4px 6px}
+  tr{break-inside:avoid}
+  td.ok{color:#1f5c45} td.non{color:#9b2c16}
+  textarea{display:none}
+  .imprime-seul{display:block;break-inside:avoid}
+  .notes-imp{border:1px solid #999;border-radius:6px;min-height:28mm;padding:6px 8px;white-space:pre-wrap}
+  .signatures{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+  .signatures div{border-top:1px solid #000;padding-top:4px;font-size:10pt}
+  .entete-imp{display:flex;justify-content:space-between;border-bottom:2px solid #000;padding-bottom:4px;font-size:10pt}
+}
+</style>
+
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script src="../compte.js"></script>
+<script>
+"use strict";
+const $ = s => document.querySelector(s), app = $("#app");
+const memo = { lire(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }, ecrire(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const hasard = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const melanger = t => { for (let i = t.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [t[i], t[j]] = [t[j], t[i]]; } return t; };
+
+/* ---------- Voix (seulement au clic sur 🔊) ---------- */
+let voix = null;
+const prendreVoix = () => { try { const v = speechSynthesis.getVoices(); voix = v.find(x => /^fr[-_]CA/i.test(x.lang)) || v.find(x => /^fr/i.test(x.lang)) || null; } catch (e) {} };
+if (window.speechSynthesis) { prendreVoix(); try { speechSynthesis.addEventListener("voiceschanged", prendreVoix); } catch (e) {} }
+function parler(t) { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); if (voix) { u.voice = voix; u.lang = voix.lang; } else u.lang = "fr-CA"; u.rate = .8; speechSynthesis.speak(u); } catch (e) {} }
+const taire = () => { try { speechSynthesis.cancel(); } catch (e) {} };
+const MOTS_OP = { "+": " plus ", "−": " moins ", "×": " fois ", "÷": " divisé par " };
+const enMots = q => q.a + MOTS_OP[q.op] + q.b + " égale combien ?";
+
+/* ---------- Réglages (enseignante) ---------- */
+const R = Object.assign({ nb: 10, mode: "choix", visuel: "oui", retro: "neutre" }, memo.lire("eval-reglages", {}));
+let eleve = "";
+/* Les parties, comme les niveaux de l'Île aux calculs */
+const PARTIES = {
+  A: { g: "pm", court: "+ − jusqu'à 10", nom: "Additions et soustractions jusqu'à 10", min: 2, max: 10 },
+  B: { g: "pm", court: "+ − de 10 à 20", nom: "Additions et soustractions de 10 à 20", min: 11, max: 20 },
+  C: { g: "pm", court: "+ − jusqu'à 50", nom: "Additions et soustractions jusqu'à 50", min: 21, max: 50 },
+  D: { g: "pm", court: "+ − jusqu'à 100", nom: "Additions et soustractions jusqu'à 100", min: 51, max: 100 },
+  E: { g: "fd", court: "× ÷ jusqu'à 10", nom: "Multiplications et divisions jusqu'à 10", min: 1, max: 10 },
+  F: { g: "fd", court: "× ÷ jusqu'à 20", nom: "Multiplications et divisions jusqu'à 20", min: 11, max: 20 },
+  G: { g: "fd", court: "× ÷ jusqu'à 50", nom: "Multiplications et divisions jusqu'à 50", min: 21, max: 50 },
+  H: { g: "fd", court: "× ÷ jusqu'à 100", nom: "Multiplications et divisions jusqu'à 100", min: 51, max: 100 }
+};
+const ORDRE_P = Object.keys(PARTIES);
+let partiesChoisies = memo.lire("eval-parties", ["A", "B"]).filter(p => PARTIES[p]);
+
+/* ---------- Banque de questions ----------
+   + et − : partie A (somme ou nombre de départ ≤ 10), B (de 11 à 20, avec et sans passage de la dizaine),
+   C (de 21 à 50), D (de 51 à 100). × et ÷ : le produit est dans l'intervalle de la partie (tables jusqu'à 10).
+   Moitié d'une opération, moitié de l'autre, sans doublon. */
+function genere(partie, n) {
+  const P = PARTIES[partie], vu = new Set(), out = [];
+  const paires = []; if (P.g === "fd") for (let x = 2; x <= 10; x++) for (let y = 2; y <= 10; y++) if (x * y >= Math.max(P.min, 2) && x * y <= P.max) paires.push([x, y]);
+  let essais = 0;
+  while (out.length < n && essais++ < 800) {
+    const premier = out.length % 2 === 0; let a, b, op;
+    if (P.g === "pm") {
+      op = premier ? "+" : "−";
+      if (partie === "A") { if (op === "+") { a = hasard(1, 9); b = hasard(1, 10 - a); } else { a = hasard(2, 10); b = hasard(1, a - 1); } }
+      else if (partie === "B") { if (op === "+") { a = hasard(2, 18); b = hasard(Math.max(1, 11 - a), Math.min(10, 20 - a)); if (b < 1) continue; } else { a = hasard(11, 20); b = hasard(1, Math.min(10, a - 1)); } }
+      else { const m = 3; if (op === "+") { const r = hasard(P.min, P.max); a = hasard(m, r - m); b = r - a; } else { a = hasard(P.min, P.max); b = hasard(m, a - m); } }
+    } else {
+      const [x, y] = paires[hasard(0, paires.length - 1)];
+      if (premier) { op = "×"; a = x; b = y; } else { op = "÷"; a = x * y; b = x; }
+    }
+    const cle = op === "+" || op === "×" ? Math.min(a, b) + op + Math.max(a, b) : a + op + b; if (vu.has(cle) && essais < 600) continue; vu.add(cle);
+    const rep = op === "+" ? a + b : op === "−" ? a - b : op === "×" ? a * b : a / b;
+    const dizaine = P.g === "pm" && partie !== "A" && (op === "+" ? (a % 10) + (b % 10) >= 10 && (a + b) % 10 !== 0 || (partie === "B" && (a % 10) + (b % 10) > 10) : (a % 10) < (b % 10));
+    out.push({ partie, a, b, op, rep, dizaine });
+  }
+  return melanger(out);
+}
+function propositions(q) {
+  const P = PARTIES[q.partie], max = Math.max(P.max, q.rep + 10), s = new Set([q.rep]);
+  const pieges = P.g === "pm" ? [q.rep + 1, q.rep - 1, q.op === "+" ? Math.abs(q.a - q.b) : q.a + q.b, P.max > 20 ? q.rep + 10 : q.rep + 2, P.max > 20 ? q.rep - 10 : q.rep - 2, q.rep + 2, q.rep - 2]
+    : q.op === "×" ? [q.rep + q.a, q.rep - q.a, q.a + q.b, q.rep + q.b, q.rep - q.b, q.rep + 1] : [q.rep + 1, q.rep - 1, q.a - q.b, q.rep + 2, q.rep - 2];
+  for (const p of melanger(pieges.slice(0, 3)).concat(pieges.slice(3))) { if (s.size >= 3) break; if (p >= 0 && p <= max && p !== q.rep) s.add(p); }
+  while (s.size < 3) s.add(hasard(0, max));
+  return melanger([...s]);
+}
+
+/* ---------- Déroulement ---------- */
+let S = null; // état de la passation
+/* ---------- Connexion de l'élève : obligatoire avant de commencer ---------- */
+let verif = !!(window.EC && EC.connecte());
+function compte() {
+  if (!window.EC || !EC.connecte()) return { etat: "hors" };
+  if (verif) return { etat: "verif" };
+  const p = EC.profil(); if (!p) return { etat: "hors" };
+  return p.role === "student" ? { etat: "eleve" } : { etat: "prof" };
+}
+function carteCompte() {
+  const c = compte();
+  if (c.etat === "verif") return `<div class="compte-carte"><span class="ico-c" aria-hidden="true">⏳</span><p>Vérification de la connexion…</p></div>`;
+  if (c.etat === "eleve") return `<div class="compte-carte ok"><span class="ico-c" aria-hidden="true">🎒</span><div><p>Élève connecté : <b>${esc(eleve || (EC.profil() || {}).nom || "")}</b></p><button type="button" class="lien-btn" id="pasMoi">Ce n'est pas toi ? Se déconnecter</button></div></div>`;
+  if (c.etat === "prof") return `<div class="compte-carte attention"><span class="ico-c" aria-hidden="true">🍎</span><div><p><b>Vous êtes connectée comme enseignante.</b> L'évaluation doit être faite avec le compte de l'élève.</p><button type="button" class="btn bleu petit" id="changer">Se déconnecter et connecter l'élève</button></div></div>`;
+  return `<div class="compte-carte attention"><span class="ico-c" aria-hidden="true">🔒</span><div><p><b>Connecte-toi d'abord avec ton compte élève.</b> Ensuite, tu pourras commencer.</p><a class="btn vert petit" id="seConnecter" href="${window.EC ? EC.lienConnexion("eleve") : "../connexion.html?role=eleve"}">🎒 Connexion élève</a></div></div>`;
+}
+function brancherCompte() {
+  if ($("#pasMoi")) $("#pasMoi").onclick = () => EC.deconnexion().then(() => { eleve = ""; rendre(); });
+  if ($("#changer")) $("#changer").onclick = () => EC.deconnexion().then(() => { location.href = EC.lienConnexion("eleve"); });
+}
+if (verif) EC.chargerProfil().then(d => { if (d && d.role === "student") eleve = (d.student.first_name + " " + d.student.last_name).trim(); }).catch(() => {}).finally(() => { verif = false; if (!S) rendre(); });
+
+function demarrer() {
+  if (compte().etat !== "eleve") { S = null; return rendre(); }
+  if (!eleve) eleve = (EC.profil() || {}).nom || "";
+  const parties = ORDRE_P.filter(p => partiesChoisies.includes(p)); if (!parties.length) return rendre();
+  S = { eleve, debut: Date.now(), parties, reglages: { ...R }, file: [], i: 0, reponses: [], pauses: 0, ecran: "exemple" };
+  parties.forEach(p => S.file.push(...genere(p, R.nb)));
+  S.exemple = PARTIES[parties[0]].g === "fd" ? { partie: parties[0], a: 2, b: 3, op: "×", rep: 6, exemple: true } : { partie: parties[0], a: 2, b: 1, op: "+", rep: 3, exemple: true };
+  rendre();
+}
+const etapesPlan = () => { const t = []; S.parties.forEach((p, k) => { if (k) t.push({ id: "pause", i: "🌿", t: "Pause" }); t.push({ id: p, i: ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"][k] || "▶", t: PARTIES[p].court }); }); t.push({ id: "fin", i: "⭐", t: "Fini" }); return [{ id: "ex", i: "👀", t: "Exemple" }, ...t]; };
+function plan(ici) {
+  const t = etapesPlan(), k = t.findIndex(x => x.id === ici);
+  return `<nav class="plan" aria-label="Mon plan">${t.map((x, j) => `${j ? '<span class="fl" aria-hidden="true">›</span>' : ""}<span class="p${j < k ? " fait" : ""}${j === k ? " ici" : ""}" ${j === k ? 'aria-current="step"' : ""}><span class="i" aria-hidden="true">${j < k ? "✓" : x.i}</span><span class="t">${x.t}</span></span>`).join("")}</nav>`;
+}
+
+function rendre() {
+  taire();
+  if (!S) return accueil();
+  if (S.ecran === "exemple") return question(S.exemple, true);
+  if (S.ecran === "pause-entre") return pauseEntre();
+  if (S.ecran === "pause") return pause();
+  if (S.ecran === "fin") return fin();
+  return question(S.file[S.i], false);
+}
+
+/* ---------- Accueil ---------- */
+function accueil() {
+  app.innerHTML = `<a class="retour-site" href="../mathematiques.html">⬅ Retour aux mathématiques</a><h1>Évaluation de calcul</h1>
+  <p class="doux">Additions, soustractions, multiplications et divisions. On répond à une question à la fois. On peut prendre une pause quand on veut.</p>
+  <section class="carte">
+    ${carteCompte()}
+    <div class="choix-parties" role="group" aria-label="Que veut-on évaluer ?">
+      ${[["pm", "+ −", "Additions et soustractions"], ["fd", "× ÷", "Multiplications et divisions"]].map(([g, sig, titre]) => `<div class="grp ${g}"><p class="grp-titre"><span class="sig">${sig}</span>${titre}</p><div class="puces">${ORDRE_P.filter(p => PARTIES[p].g === g).map(p => `<button type="button" class="puce-p" data-p="${p}" aria-pressed="${partiesChoisies.includes(p)}"><span class="coche" aria-hidden="true">✓</span>${PARTIES[p].court.replace(/^[+−×÷ ]+/, "")}</button>`).join("")}<button type="button" class="puce-p tout" data-tout="${g}">Tout</button></div></div>`).join("")}
+      <p class="note" id="resumeParties"></p>
+    </div>
+    <details class="reglages"><summary>⚙️ Réglages de l'enseignante</summary><div class="opts">
+      ${seg("nb", "Questions par partie", [[5, "5"], [10, "10"], [15, "15"]])}
+      ${seg("mode", "Façon de répondre", [["choix", "3 choix"], ["clavier", "Clavier de nombres"]])}
+      ${seg("visuel", "Aide visuelle (points, jusqu'à 20 ou 50)", [["oui", "Oui"], ["non", "Non"]])}
+      ${seg("retro", "Après chaque réponse", [["neutre", "« C'est noté »"], ["juste", "Montrer si c'est juste"]])}
+    </div><p class="note" style="margin-top:10px">Ces réglages sont notés dans le rapport, pour savoir dans quelles conditions l'élève a répondu.</p></details>
+    <div class="rang"><button type="button" class="btn vert" id="go" ${compte().etat === "eleve" && partiesChoisies.length ? "" : "disabled"}>▶ Commencer</button><button type="button" class="btn petit" id="histo">📋 Résultats enregistrés</button></div>
+  </section>`;
+  brancherCompte();
+  const majParties = () => {
+    partiesChoisies = ORDRE_P.filter(p => partiesChoisies.includes(p)); memo.ecrire("eval-parties", partiesChoisies);
+    document.querySelectorAll("[data-p]").forEach(x => x.setAttribute("aria-pressed", String(partiesChoisies.includes(x.dataset.p))));
+    const n = partiesChoisies.length;
+    $("#resumeParties").textContent = n ? `${n} partie${n > 1 ? "s" : ""} choisie${n > 1 ? "s" : ""} : ${partiesChoisies.map(p => PARTIES[p].court).join(", ")}.${n > 1 ? " Une pause entre chaque partie." : ""}` : "Choisis au moins une partie.";
+    $("#go").disabled = !(compte().etat === "eleve" && n);
+  };
+  document.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { const p = b.dataset.p; partiesChoisies = partiesChoisies.includes(p) ? partiesChoisies.filter(x => x !== p) : partiesChoisies.concat(p); majParties(); });
+  document.querySelectorAll("[data-tout]").forEach(b => b.onclick = () => { const g = ORDRE_P.filter(p => PARTIES[p].g === b.dataset.tout), tous = g.every(p => partiesChoisies.includes(p)); partiesChoisies = tous ? partiesChoisies.filter(p => !g.includes(p)) : [...new Set(partiesChoisies.concat(g))]; majParties(); });
+  majParties();
+  document.querySelectorAll("[data-r]").forEach(b => b.onclick = () => { const k = b.dataset.r, v = b.dataset.v; R[k] = k === "nb" ? +v : v; memo.ecrire("eval-reglages", R); b.parentElement.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); });
+  $("#go").onclick = () => { if (compte().etat === "eleve") demarrer(); };
+  $("#histo").onclick = historique;
+}
+const seg = (k, nom, vals) => `<div class="opt">${nom}<span class="seg">${vals.map(([v, t]) => `<button type="button" data-r="${k}" data-v="${v}" aria-pressed="${String(R[k]) === String(v)}">${t}</button>`).join("")}</span></div>`;
+
+/* ---------- Une question ---------- */
+function cadres(q) {
+  if (S.reglages.visuel !== "oui") return "";
+  if (q.op === "×" || q.op === "÷") { // grille de points : rangées égales
+    const rangs = q.op === "×" ? q.a : q.b, col = q.op === "×" ? q.b : q.rep;
+    if (rangs * col > 50) return "";
+    const pts = Array.from({ length: rangs }, () => `<div class="rangee">${"<span></span>".repeat(col)}</div>`).join("");
+    const leg = q.op === "×" ? `<span>${q.a} rangée${q.a > 1 ? "s" : ""} de ${q.b} point${q.b > 1 ? "s" : ""}</span>` : `<span>${q.a} points partagés en ${q.b} rangées égales</span>`;
+    return `<div class="grille-pts" aria-hidden="true">${pts}</div><div class="legende">${leg}</div>`;
+  }
+  const total = q.op === "+" ? q.a + q.b : q.a; if (total > 20) return "";
+  const n = total > 10 ? 2 : 1, cases = [];
+  for (let i = 0; i < n * 10; i++) {
+    let c = "";
+    if (q.op === "+") c = i < q.a ? "a" : i < q.a + q.b ? "b" : "";
+    else c = i < q.a - q.b ? "a" : i < q.a ? "x" : "";
+    cases.push(`<span class="${c}"></span>`);
+  }
+  const html = []; for (let k = 0; k < n; k++) html.push(`<div class="cadre10" aria-hidden="true">${cases.slice(k * 10, k * 10 + 10).join("")}</div>`);
+  const leg = q.op === "+" ? `<span><i style="background:var(--bleu)"></i>${q.a}</span><span><i style="background:var(--or)"></i>${q.b} de plus</span>` : `<span><i style="background:var(--bleu)"></i>${q.a} au départ</span><span><i style="background:var(--corail)"></i>${q.b} enlevés</span>`;
+  return `<div class="cadres">${html.join("")}</div><div class="legende">${leg}</div>`;
+}
+function question(q, exemple) {
+  const ici = exemple ? "ex" : q.partie, parties = S.file.filter(x => x.partie === q.partie), k = exemple ? 0 : S.file.slice(0, S.i).filter(x => x.partie === q.partie).length;
+  const pastilles = exemple ? "" : `<div class="pastilles" aria-label="Question ${k + 1} sur ${parties.length}">${parties.map((_, j) => `<i class="${j < k ? "ok" : j === k ? "ici" : ""}"></i>`).join("")}</div>`;
+  app.innerHTML = `${plan(ici)}
+  <div class="barre-haut">${pastilles}<span class="doux">${exemple ? "On s'exerce : cette question ne compte pas." : `Question ${k + 1} sur ${parties.length}`}</span><button type="button" class="btn petit" id="pauseBtn">🌿 J'ai besoin d'une pause</button></div>
+  <section class="carte q-zone">
+    <div class="rang" style="justify-content:center"><p class="consigne">${exemple ? "Regarde l'exemple. Touche la bonne réponse." : "Trouve la réponse."}</p><button type="button" class="ecoute" id="lireQ" aria-label="Écouter la question">🔊</button></div>
+    <div class="calcul" aria-label="${esc(enMots(q))}"><span>${q.a}</span><span>${q.op}</span><span>${q.b}</span><span>=</span><span class="trou" id="trou">?</span></div>
+    ${cadres(q)}
+    <div id="repondre"></div>
+    <p class="merci" id="merci" aria-live="polite"></p>
+  </section>`;
+  $("#lireQ").onclick = () => parler(enMots(q));
+  $("#pauseBtn").onclick = () => { S.retour = S.ecran; S.ecran = "pause"; S.pauses++; rendre(); };
+  const t0 = Date.now(); let fini = false;
+  const valider = v => {
+    if (fini) return; fini = true;
+    $("#trou").textContent = v;
+    const juste = v === q.rep, m = $("#merci");
+    if (exemple) {
+      const ex = `${q.a} ${q.op} ${q.b} = ${q.rep}`;
+      m.textContent = juste ? `Oui ! ${ex}. Maintenant, c'est à toi.` : (q.op === "+" ? "La réponse est 3 : 2 points bleus et 1 point jaune, ça fait 3." : `La réponse est ${q.rep} : 2 rangées de 3 points, ça fait ${q.rep}.`) + " Maintenant, c'est à toi.";
+      if (!juste) $("#trou").textContent = String(q.rep);
+      setTimeout(() => { S.ecran = "q"; rendre(); }, 2200); return;
+    }
+    S.reponses.push({ ...q, donne: v, juste, sec: Math.round((Date.now() - t0) / 1000), mode: S.reglages.mode, visuel: S.reglages.visuel });
+    m.textContent = S.reglages.retro === "juste" ? (juste ? "✓ C'est juste !" : "C'est noté. La réponse était " + q.rep + ".") : "✓ C'est noté. Merci !";
+    if (S.reglages.retro === "juste" && !juste) m.style.color = "var(--doux)";
+    setTimeout(suivante, 1300);
+  };
+  if (S.reglages.mode === "choix") {
+    $("#repondre").innerHTML = `<div class="choix" role="group" aria-label="Choix de réponses">${propositions(q).map(v => `<button type="button" data-v="${v}">${v}</button>`).join("")}</div>`;
+    document.querySelectorAll(".choix button").forEach(b => b.onclick = () => { b.setAttribute("aria-pressed", "true"); document.querySelectorAll(".choix button").forEach(x => x.disabled = true); valider(+b.dataset.v); });
+  } else {
+    let saisie = "";
+    $("#repondre").innerHTML = `<div class="rang" style="justify-content:center;flex-direction:column;gap:14px"><div class="ecran" id="ecran" aria-live="polite">&nbsp;</div><div class="clavier">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(n => `<button type="button" data-n="${n}">${n}</button>`).join("")}</div><div class="rang" style="justify-content:center"><button type="button" class="btn petit" id="eff">⌫ Effacer</button><button type="button" class="btn vert" id="ok" disabled>✓ C'est ma réponse</button></div></div>`;
+    const maj = () => { $("#ecran").innerHTML = saisie || "&nbsp;"; $("#ok").disabled = !saisie; };
+    document.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { if (saisie.length < 3) saisie = (saisie === "0" ? "" : saisie) + b.dataset.n; maj(); });
+    $("#eff").onclick = () => { saisie = saisie.slice(0, -1); maj(); };
+    $("#ok").onclick = () => { if (saisie) valider(+saisie); };
+  }
+}
+function suivante() {
+  S.i++;
+  if (S.i >= S.file.length) { S.ecran = "fin"; S.fin = Date.now(); enregistrer(); }
+  else if (S.file[S.i].partie !== S.file[S.i - 1].partie) S.ecran = "pause-entre";
+  else S.ecran = "q";
+  rendre();
+}
+
+/* ---------- Pauses ---------- */
+function pause() {
+  app.innerHTML = `${plan(S.retour === "exemple" ? "ex" : (S.file[S.i] || {}).partie)}
+  <section class="carte pause"><h2>C'est la pause</h2><div class="souffle">Respire</div><p class="doux">Inspire quand le cercle grandit. Expire quand il rapetisse.<br>Tu reviens quand tu es prêt ou prête.</p>
+  <button type="button" class="btn vert" id="reprendre">▶ Je suis prêt, je continue</button></section>`;
+  $("#reprendre").onclick = () => { S.ecran = S.retour; rendre(); };
+}
+function pauseEntre() {
+  app.innerHTML = `${plan("pause")}
+  <section class="carte pause"><div class="etoile" aria-hidden="true">🌿</div><h2>Bravo, cette partie est finie !</h2><p class="doux">Prends une petite pause. Ensuite : <b>${PARTIES[S.file[S.i].partie].nom.toLowerCase().replace(/^./, c => c.toUpperCase())}</b>.</p>
+  <div class="souffle">Respire</div><button type="button" class="btn vert" id="reprendre">▶ Je commence la partie suivante</button></section>`;
+  $("#reprendre").onclick = () => { S.ecran = "q"; rendre(); };
+}
+
+/* ---------- Fin : écran de l'élève, puis rapport de l'enseignante ---------- */
+function fin() {
+  app.innerHTML = `${plan("fin")}
+  <section class="carte pause"><div class="etoile" aria-hidden="true">⭐</div><h2>Tu as terminé !</h2><p class="doux">Merci${S.eleve ? ", " + esc(S.eleve) : ""}. Tu as bien travaillé.</p>
+  <div class="porte"><p class="note">Pour l'enseignante</p><button type="button" class="btn bleu" id="voir">📋 Voir le rapport</button></div></section>`;
+  $("#voir").onclick = () => rapport(S);
+}
+const niveau = p => p >= 80 ? "Niveau 4" : p >= 70 ? "Niveau 3" : p >= 60 ? "Niveau 2" : p >= 50 ? "Niveau 1" : "En dessous du niveau 1";
+const NOM_OP = { "+": "Additions", "−": "Soustractions", "×": "Multiplications", "÷": "Divisions" };
+function analyse(reps) {
+  const parts = {}; reps.forEach(r => { const p = parts[r.partie] || (parts[r.partie] = { n: 0, ok: 0, ops: {}, diz: [0, 0], un: 0, inv: 0, table: 0, sec: 0 });
+    p.n++; p.ok += r.juste; p.sec += r.sec; const t = p.ops[r.op] || (p.ops[r.op] = [0, 0]); t[0] += r.juste; t[1]++;
+    if (r.dizaine) { p.diz[0] += r.juste; p.diz[1]++; }
+    if (r.juste) return;
+    const inverse = r.op === "+" ? Math.abs(r.a - r.b) : r.op === "−" ? r.a + r.b : r.op === "×" ? r.a + r.b : r.a - r.b;
+    if (r.donne === inverse) p.inv++;
+    else if (r.op === "×" && (Math.abs(r.donne - r.rep) === r.a || Math.abs(r.donne - r.rep) === r.b)) p.table++;
+    else if (Math.abs(r.donne - r.rep) === 1) p.un++; });
+  return parts;
+}
+function observations(p) {
+  const o = [], pc = a => a && a[1] ? Math.round(100 * a[0] / a[1]) : null, ops = Object.keys(p.ops);
+  if (ops.length === 2) { const [x, y] = ops, px = pc(p.ops[x]), py = pc(p.ops[y]); if (Math.abs(px - py) >= 30) { const [f, d] = px > py ? [x, y] : [y, x]; o.push(`Plus à l'aise avec les ${NOM_OP[f].toLowerCase()} (${pc(p.ops[f])} %) qu'avec les ${NOM_OP[d].toLowerCase()} (${pc(p.ops[d])} %).`); } }
+  if (p.un >= 2) o.push(`${p.un} réponses à 1 près : l'élève compte peut-être le nombre de départ, ou s'arrête un pas trop tôt. Vérifier le comptage à partir d'un nombre.`);
+  if (p.inv >= 1) o.push(`${p.inv} réponse${p.inv > 1 ? "s" : ""} où l'élève a fait une autre opération (par exemple + au lieu de × ou de −). Vérifier la lecture du signe.`);
+  if (p.table >= 2) o.push(`${p.table} erreurs d'une rangée de trop ou de moins dans les multiplications : revoir les tables concernées.`);
+  if (p.diz[1] >= 2 && pc(p.diz) < 60) o.push(`Difficulté avec le passage de la dizaine (${p.diz[0]} / ${p.diz[1]}).`);
+  if (!o.length && p.ok === p.n) o.push("Toutes les réponses sont justes.");
+  if (!o.length) o.push("Aucune erreur récurrente repérée.");
+  return o;
+}
+function rapport(s) {
+  const reps = s.reponses, parts = analyse(reps), dur = Math.max(1, Math.round(((s.fin || Date.now()) - s.debut) / 60000));
+  const nomP = p => PARTIES[p] ? PARTIES[p].nom : p;
+  const rg = s.reglages, cond = `${rg.mode === "choix" ? "3 choix de réponses" : "clavier de nombres"} · aide visuelle ${rg.visuel === "oui" ? "oui (points)" : "non"} · rétroaction ${rg.retro === "neutre" ? "neutre" : "juste / pas juste"}`;
+  app.innerHTML = `<a class="retour-site" href="../mathematiques.html">⬅ Retour aux mathématiques</a><div class="entete-imp imprime-seul"><span>EduCentre · De La Salle, Ottawa</span><span>Mathématiques · Évaluation adaptée</span></div><h1>Rapport d'évaluation</h1>
+  <section class="carte">
+    <div class="rang" style="justify-content:space-between"><h2>${esc(s.eleve || "Élève")}</h2><span class="doux">${new Date(s.debut).toLocaleDateString("fr-CA", { day: "numeric", month: "long", year: "numeric" })} · environ ${dur} min · ${s.pauses} pause${s.pauses > 1 ? "s" : ""} demandée${s.pauses > 1 ? "s" : ""}</span></div>
+    <p class="note">Conditions : ${cond}.</p>
+    <div class="resume">${Object.keys(parts).map(p => { const x = parts[p], pc = Math.round(100 * x.ok / x.n); return `<div class="tuile"><span class="t">${nomP(p)}</span><span class="v">${x.ok} / ${x.n}</span><span class="n">${pc} % · ${niveau(pc)}</span><span class="t">${["+", "−", "×", "÷"].filter(o => x.ops[o]).map(o => `${NOM_OP[o]} ${x.ops[o][0]}/${x.ops[o][1]}`).join(" · ")} · ${Math.round(x.sec / x.n)} s par question</span></div>`; }).join("")}</div>
+    ${Object.keys(parts).map(p => `<div><h3>Observations — ${nomP(p)}</h3><ul class="obs">${observations(parts[p]).map(o => `<li>${o}</li>`).join("")}</ul></div>`).join("")}
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Partie</th><th>Calcul</th><th>Bonne réponse</th><th>Réponse de l'élève</th><th>Résultat</th><th>Temps</th></tr></thead><tbody>
+      ${reps.map((r, k) => `<tr><td>${k + 1}</td><td>${PARTIES[r.partie] ? PARTIES[r.partie].court : r.partie}</td><td>${r.a} ${r.op} ${r.b}${r.dizaine ? " ↺" : ""}</td><td>${r.rep}</td><td>${r.donne}</td><td class="${r.juste ? "ok" : "non"}">${r.juste ? "✓ juste" : "✗ à revoir"}</td><td>${r.sec} s</td></tr>`).join("")}
+    </tbody></table></div>
+    <p class="note">↺ = passage de la dizaine. Les niveaux suivent l'échelle de 1 à 4 (80 % et plus = niveau 4). Ils servent de repère : votre jugement professionnel reste la référence.</p>
+    <div class="imprime-seul"><h3>Notes de l'enseignante</h3><div class="notes-imp" id="notesImp">${esc(s.notes || "")}</div><div class="signatures"><div>Signature de l'enseignante</div><div>Date</div></div></div>
+    <label class="champ no-print">Notes de l'enseignante<textarea id="notesEns" placeholder="Comportement, stratégies observées (doigts, comptage à voix haute…), soutiens offerts…">${esc(s.notes || "")}</textarea></label>
+    <div class="rang"><button type="button" class="btn vert" id="imprimer">🖨️ Imprimer le rapport</button><button type="button" class="btn" id="copier">📋 Copier le rapport</button><button type="button" class="btn" id="recommencer">↻ Nouvelle évaluation</button><button type="button" class="btn petit" id="histo2">Résultats enregistrés</button></div>
+    <p class="merci" id="copie" aria-live="polite"></p>
+  </section>`;
+  $("#notesEns").oninput = e => { s.notes = e.target.value; $("#notesImp").textContent = s.notes; enregistrer(s); };
+  $("#imprimer").onclick = () => { window.print(); };
+  $("#copier").onclick = () => {
+    const txt = [`Évaluation de calcul — ${s.eleve || "Élève"} — ${new Date(s.debut).toLocaleDateString("fr-CA")}`, `Conditions : ${cond}. Pauses : ${s.pauses}.`,
+      ...Object.keys(parts).map(p => { const x = parts[p], pc = Math.round(100 * x.ok / x.n); return `${nomP(p)} : ${x.ok}/${x.n} (${pc} %, ${niveau(pc)}). ${observations(x).join(" ")}`; }),
+      "Détail : " + reps.map(r => `${r.a}${r.op}${r.b}=${r.donne}${r.juste ? "✓" : "✗(" + r.rep + ")"}`).join(", "), s.notes ? "Notes : " + s.notes : ""].filter(Boolean).join("\n");
+    const ok = () => $("#copie").textContent = "✓ Rapport copié. Vous pouvez le coller dans un courriel ou un document.";
+    try { navigator.clipboard.writeText(txt).then(ok, () => secours(txt)); } catch (e) { secours(txt); }
+  };
+  $("#recommencer").onclick = () => { S = null; rendre(); };
+  $("#histo2").onclick = historique;
+}
+function secours(txt) { const t = $("#notesEns"); const avant = t.value; t.value = txt; t.select(); $("#copie").textContent = "Le rapport est sélectionné dans la zone de notes : faites Ctrl+C (ou Cmd+C), puis Annuler."; setTimeout(() => { if (t.value === txt) { t.value = avant; } }, 15000); }
+
+/* ---------- Résultats enregistrés sur cet appareil ---------- */
+function enregistrer(s) {
+  s = s || S; const h = memo.lire("eval-historique", []), k = h.findIndex(x => x.debut === s.debut);
+  const copie = { eleve: s.eleve, debut: s.debut, fin: s.fin, parties: s.parties, reglages: s.reglages, reponses: s.reponses, pauses: s.pauses, notes: s.notes || "" };
+  if (k >= 0) h[k] = copie; else h.unshift(copie); memo.ecrire("eval-historique", h.slice(0, 60));
+}
+function historique() {
+  const h = memo.lire("eval-historique", []);
+  app.innerHTML = `<a class="retour-site" href="../mathematiques.html">⬅ Retour aux mathématiques</a><div class="entete-imp imprime-seul"><span>EduCentre · De La Salle, Ottawa</span><span>Évaluation de calcul · résultats</span></div><h1>Résultats enregistrés</h1>
+  <section class="carte"><p class="note">Ces résultats sont gardés seulement dans ce navigateur, sur cet appareil.</p>
+  ${h.length ? `<div class="table-wrap"><table><thead><tr><th>Date</th><th>Élève</th><th>Résultats</th><th></th></tr></thead><tbody>${h.map((s, k) => { const p = analyse(s.reponses), c = x => x ? `${x.ok}/${x.n} · ${niveau(Math.round(100 * x.ok / x.n)).replace("En dessous du niveau 1", "< niv. 1")}` : "—"; return `<tr><td>${new Date(s.debut).toLocaleDateString("fr-CA")}</td><td>${esc(s.eleve || "Élève")}</td><td>${Object.keys(p).map(k => `<div>${PARTIES[k] ? PARTIES[k].court : k} : ${c(p[k])}</div>`).join("")}</td><td><button type="button" class="btn petit" data-h="${k}">Voir</button></td></tr>`; }).join("")}</tbody></table></div>` : `<p class="doux">Aucun résultat pour l'instant.</p>`}
+  <div class="rang"><button type="button" class="btn" id="retour">← Retour</button>${h.length ? '<button type="button" class="btn vert" id="impListe">🖨️ Imprimer la liste</button>' : ""}</div></section>`;
+  if ($("#impListe")) $("#impListe").onclick = () => window.print();
+  document.querySelectorAll("[data-h]").forEach(b => b.onclick = () => rapport(h[+b.dataset.h]));
+  $("#retour").onclick = () => { S = null; rendre(); };
+}
+
+rendre();
+</script>
+</body>
+</html>
